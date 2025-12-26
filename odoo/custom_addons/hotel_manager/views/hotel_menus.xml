@@ -1,0 +1,20 @@
+<odoo>
+    <menuitem id="menu_hotel_root"
+              name="Quản lý Khách sạn"
+              sequence="10"/>
+
+    <menuitem id="menu_hotel_reception"
+              name="Lễ tân"
+              parent="menu_hotel_root"
+              sequence="10"/>
+
+    <menuitem id="menu_hotel_room_management"
+              name="Quản lý Phòng"
+              parent="menu_hotel_root"
+              sequence="20"/>
+
+    <menuitem id="menu_hotel_config"
+              name="Cấu hình"
+              parent="menu_hotel_root"
+              sequence="30"/>
+</odoo>

@@ -1,0 +1,20 @@
+<odoo>
+
+    <record id="group_hotel_manager" model="res.groups">
+        <field name="name">Hotel Manager</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="group_hotel_receptionist" model="res.groups">
+        <field name="name">Hotel Receptionist</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="hotel_booking_receptionist_rule" model="ir.rule">
+        <field name="name">Booking visible for receptionist</field>
+        <field name="model_id" ref="model_hotel_booking"/>
+        <field name="groups" eval="[(4, ref('hotel_manager.group_hotel_receptionist'))]"/>
+        <field name="domain_force">[('state', 'in', ['draft', 'confirmed'])]</field>
+    </record>
+
+</odoo>

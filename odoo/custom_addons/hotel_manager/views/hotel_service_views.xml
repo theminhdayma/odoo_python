@@ -1,0 +1,41 @@
+<odoo>
+
+    <record id="view_hotel_service_tree" model="ir.ui.view">
+        <field name="name">hotel.service.tree</field>
+        <field name="model">hotel.service</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_hotel_service_form" model="ir.ui.view">
+        <field name="name">hotel.service.form</field>
+        <field name="model">hotel.service</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="price"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hotel_service" model="ir.actions.act_window">
+        <field name="name">Dịch vụ</field>
+        <field name="res_model">hotel.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_hotel_service"
+              name="Dịch vụ"
+              parent="menu_hotel_config"
+              action="action_hotel_service"
+              sequence="20"/>
+
+</odoo>
