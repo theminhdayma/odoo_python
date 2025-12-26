@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Employee: chỉ thấy bản ghi của mình -->
+        <record id="rule_finance_employee_own" model="ir.rule">
+            <field name="name">Employee only own expenses</field>
+            <field name="model_id" ref="model_finance_expense"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('finance_expense.group_finance_employee'))]"/>
+        </record>
+
+        <!-- Manager & Auditor: thấy tất cả -->
+        <record id="rule_finance_all" model="ir.rule">
+            <field name="name">Manager & Auditor see all</field>
+            <field name="model_id" ref="model_finance_expense"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[
+                (4, ref('finance_expense.group_finance_manager')),
+                (4, ref('finance_expense.group_finance_auditor'))
+            ]"/>
+        </record>
+
+    </data>
+</odoo>

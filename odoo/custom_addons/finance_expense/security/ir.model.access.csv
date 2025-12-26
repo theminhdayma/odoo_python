@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_finance_employee,finance.employee,model_finance_expense,finance_expense.group_finance_employee,1,1,1,0
+access_finance_manager,finance.manager,model_finance_expense,finance_expense.group_finance_manager,1,1,1,1
+access_finance_auditor,finance.auditor,model_finance_expense,finance_expense.group_finance_auditor,1,0,0,0

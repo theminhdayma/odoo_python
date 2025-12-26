@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action -->
+        <record id="action_hr_candidate" model="ir.actions.act_window">
+            <field name="name">Danh sách Ứng viên</field>
+            <field name="res_model">hr.candidate</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Tạo ứng viên đầu tiên!
+                </p>
+            </field>
+        </record>
+
+        <!-- Menus -->
+        <menuitem id="menu_hr_recruitment_simple_root" name="Tuyển dụng Simple" sequence="10"/>
+
+        <menuitem id="menu_hr_candidate_category" name="Quản lý Hồ sơ" parent="menu_hr_recruitment_simple_root" sequence="1"/>
+
+        <menuitem id="menu_hr_candidate_all" name="Tất cả Ứng viên" parent="menu_hr_candidate_category" action="action_hr_candidate" sequence="1"/>
+    </data>
+</odoo>
