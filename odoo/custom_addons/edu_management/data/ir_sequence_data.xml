@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Sequence for Session Code -->
+        <record id="sequence_edu_session" model="ir.sequence">
+            <field name="name">Education Session Sequence</field>
+            <field name="code">edu.session</field>
+            <field name="prefix">SESS/</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+        
+    </data>
+</odoo>

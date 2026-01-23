@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Inherit Partner Form View - Add Education Page -->
+    <record id="view_partner_form_inherit_education" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.education</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Thêm checkbox "Là Giảng viên" vào đầu form -->
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="is_instructor"/>
+                <field name="session_teaching_count" invisible="1"/>
+            </xpath>
+            
+            <!-- Thêm Smart Button "Lớp đang dạy" -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(action_edu_session)d" 
+                        type="action" 
+                        class="oe_stat_button" 
+                        icon="fa-graduation-cap"
+                        context="{'search_default_instructor_id': active_id}"
+                        invisible="not is_instructor">
+                    <field name="session_teaching_count" widget="statinfo" string="Lớp dạy"/>
+                </button>
+            </xpath>
+            
+            <!-- Thêm Page "Education" vào notebook -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Education" name="education" invisible="not is_instructor">
+                    <group>
+                        <group string="Thông tin Giảng viên">
+                            <field name="is_instructor" string="Là Giảng viên"/>
+                        </group>
+                    </group>
+                    <group string="Lớp đang dạy">
+                        <field name="session_teaching_ids" nolabel="1">
+                            <tree string="Lớp học">
+                                <field name="name"/>
+                                <field name="course_id"/>
+                                <field name="start_date"/>
+                                <field name="duration"/>
+                                <field name="seats"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group string="Lớp đang học (Học viên)">
+                        <field name="session_attending_ids" nolabel="1">
+                            <tree string="Lớp học">
+                                <field name="name"/>
+                                <field name="course_id"/>
+                                <field name="start_date"/>
+                                <field name="duration"/>
+                                <field name="instructor_id"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo>

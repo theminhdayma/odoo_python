@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <!-- Category: Education -->
+        <record id="module_category_education" model="ir.module.category">
+            <field name="name">Education</field>
+            <field name="description">Quản lý giáo dục và đào tạo</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <!-- Group: User -->
+        <record id="group_edu_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="module_category_education"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+        
+        <!-- Group: Manager -->
+        <record id="group_edu_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_education"/>
+            <field name="implied_ids" eval="[(4, ref('group_edu_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+        
+    </data>
+</odoo>

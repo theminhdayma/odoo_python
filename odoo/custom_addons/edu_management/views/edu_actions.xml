@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action - Lớp học -->
+        <record id="action_edu_session" model="ir.actions.act_window">
+            <field name="name">Lớp học</field>
+            <field name="res_model">edu.session</field>
+            <field name="view_mode">tree,kanban,form,calendar,graph,pivot</field>
+            <field name="context">{'search_default_filter_open': 1}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Tạo Lớp học đầu tiên
+                </p>
+                <p>
+                    Lớp học là nơi học viên tham gia khóa học với
+                    giảng viên.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>

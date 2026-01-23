@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Root Menu: Education -->
+    <menuitem id="menu_education_root"
+              name="Education"
+              sequence="10"
+              web_icon="edu_management,static/description/icon.png"/>
+    
+    <!-- Main Menu: Đào tạo -->
+    <menuitem id="menu_education_training"
+              name="Đào tạo"
+              parent="menu_education_root"
+              sequence="10"/>
+    
+    <!-- Sub Menu: Khóa học -->
+    <menuitem id="menu_education_courses"
+              name="Khóa học"
+              parent="menu_education_training"
+              action="action_edu_course"
+              sequence="10"/>
+    
+    <!-- Sub Menu: Môn học/Chuyên ngành -->
+    <menuitem id="menu_education_subjects"
+              name="Môn học/Chuyên ngành"
+              parent="menu_education_training"
+              action="action_edu_subject"
+              sequence="20"/>
+    
+    <!-- Sub Menu: Lớp học -->
+    <menuitem id="menu_education_sessions"
+              name="Lớp học"
+              parent="menu_education_training"
+              action="action_edu_session"
+              sequence="30"/>
+    
+    <!-- Sub Menu: Phòng học -->
+    <menuitem id="menu_education_classrooms"
+              name="Phòng học"
+              parent="menu_education_training"
+              action="action_edu_classroom"
+              sequence="40"/>
+    
+    <!-- Main Menu: Báo cáo -->
+    <menuitem id="menu_education_reports"
+              name="Báo cáo"
+              parent="menu_education_root"
+              sequence="20"/>
+    
+    <!-- Main Menu: Cấu hình -->
+    <menuitem id="menu_education_configuration"
+              name="Cấu hình"
+              parent="menu_education_root"
+              sequence="100"/>
+    
+    <!-- Sub Menu: Giảng viên (Partners) -->
+    <menuitem id="menu_education_instructors"
+              name="Giảng viên"
+              parent="menu_education_configuration"
+              action="base.action_partner_form"
+              sequence="10"/>
+    
+    <!-- Sub Menu: Học phí (Products) -->
+    <menuitem id="menu_education_products"
+              name="Học phí"
+              parent="menu_education_configuration"
+              action="product.product_template_action"
+              sequence="20"/>
+
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Inherit Product Template Form View - Add Education Fee -->
+    <record id="view_product_template_form_inherit_edu_fee" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.edu.fee</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            
+            <!-- Thêm checkbox "Là Học phí" -->
+            <xpath expr="//field[@name='detailed_type']" position="after">
+                <field name="is_edu_fee"/>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    <!-- Inherit Product Template Tree View -->
+    <record id="view_product_template_tree_inherit_edu_fee" model="ir.ui.view">
+        <field name="name">product.template.tree.inherit.edu.fee</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='list_price']" position="after">
+                <field name="is_edu_fee" string="Học phí"/>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    <!-- Search View - Add filter for Education Fee products -->
+    <record id="view_product_template_search_inherit_edu_fee" model="ir.ui.view">
+        <field name="name">product.template.search.inherit.edu.fee</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//filter[@name='consumable']" position="after">
+                <separator/>
+                <filter string="Học phí" 
+                        name="filter_edu_fee" 
+                        domain="[('is_edu_fee', '=', True)]"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo>

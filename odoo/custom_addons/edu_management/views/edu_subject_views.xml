@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Form View - Môn học/Chuyên ngành -->
+    <record id="view_edu_subject_form" model="ir.ui.view">
+        <field name="name">edu.subject.form</field>
+        <field name="model">edu.subject</field>
+        <field name="arch" type="xml">
+            <form string="Môn học/Chuyên ngành">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_edu_course)d" 
+                                type="action" 
+                                class="oe_stat_button" 
+                                icon="fa-book"
+                                context="{'search_default_subject_id': active_id}">
+                            <field name="course_count" widget="statinfo" string="Khóa học"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="category"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Mô tả về chuyên ngành..."/>
+                    </group>
+                    <notebook>
+                        <page string="Các Khóa học" name="courses">
+                            <field name="course_ids">
+                                <tree string="Khóa học">
+                                    <field name="name"/>
+                                    <field name="responsible_id"/>
+                                    <field name="level"/>
+                                    <field name="active"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Tree View - Môn học -->
+    <record id="view_edu_subject_tree" model="ir.ui.view">
+        <field name="name">edu.subject.tree</field>
+        <field name="model">edu.subject</field>
+        <field name="arch" type="xml">
+            <tree string="Môn học/Chuyên ngành">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category"/>
+                <field name="course_count"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Search View - Môn học -->
+    <record id="view_edu_subject_search" model="ir.ui.view">
+        <field name="name">edu.subject.search</field>
+        <field name="model">edu.subject</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Môn học">
+                <field name="name"/>
+                <field name="code"/>
+                
+                <filter string="CNTT (IT)" 
+                        name="filter_it" 
+                        domain="[('category', '=', 'it')]"/>
+                <filter string="Kinh tế" 
+                        name="filter_economics" 
+                        domain="[('category', '=', 'economics')]"/>
+                <filter string="Ngoại ngữ" 
+                        name="filter_language" 
+                        domain="[('category', '=', 'language')]"/>
+                
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Phân loại" name="group_category" 
+                            context="{'group_by': 'category'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Action - Môn học -->
+    <record id="action_edu_subject" model="ir.actions.act_window">
+        <field name="name">Môn học/Chuyên ngành</field>
+        <field name="res_model">edu.subject</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo Chuyên ngành đầu tiên
+            </p>
+            <p>
+                Chuyên ngành giúp phân loại các khóa học: IT, Kinh tế, Ngoại ngữ...
+            </p>
+        </field>
+    </record>
+
+</odoo>

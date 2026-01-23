@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Form View - Khóa học -->
+    <record id="view_edu_course_form" model="ir.ui.view">
+        <field name="name">edu.course.form</field>
+        <field name="model">edu.course</field>
+        <field name="arch" type="xml">
+            <form string="Khóa học">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_edu_session)d" 
+                                type="action" 
+                                class="oe_stat_button" 
+                                icon="fa-graduation-cap"
+                                context="{'search_default_course_id': active_id}">
+                            <field name="session_count" widget="statinfo" string="Lớp học"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" placeholder="VD: Python for Beginners"/>
+                            <field name="subject_id"/>
+                            <field name="level"/>
+                        </group>
+                        <group>
+                            <field name="responsible_id"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Thông tin chung" name="general_info">
+                            <group>
+                                <field name="description" nolabel="1" placeholder="Mô tả chi tiết về khóa học..."/>
+                            </group>
+                        </page>
+                        <page string="Danh sách Lớp học" name="sessions">
+                            <field name="session_ids" nolabel="1">
+                                <tree string="Lớp học" 
+                                      decoration-danger="taken_seats &gt;= 100"
+                                      decoration-muted="state == 'cancel'">
+                                    <field name="name"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="duration"/>
+                                    <field name="seats"/>
+                                    <field name="attendee_count"/>
+                                    <field name="taken_seats"
+                                           widget="progressbar"/>
+                                    <field name="instructor_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Tree View - Khóa học -->
+    <record id="view_edu_course_tree" model="ir.ui.view">
+        <field name="name">edu.course.tree</field>
+        <field name="model">edu.course</field>
+        <field name="arch" type="xml">
+            <tree string="Khóa học">
+                <field name="name"/>
+                <field name="subject_id"/>
+                <field name="responsible_id"/>
+                <field name="level"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Search View - Khóa học -->
+    <record id="view_edu_course_search" model="ir.ui.view">
+        <field name="name">edu.course.search</field>
+        <field name="model">edu.course</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Khóa học">
+                <field name="name" string="Tên khóa học"
+                       filter_domain="[('name', 'ilike', self)]"/>
+                <field name="responsible_id" string="Người phụ trách"/>
+                <field name="subject_id" string="Chuyên ngành"/>
+                
+                <filter string="Khóa học đang hoạt động" 
+                        name="filter_active" 
+                        domain="[('active', '=', True)]"/>
+                <filter string="Khóa học đã đóng" 
+                        name="filter_inactive" 
+                        domain="[('active', '=', False)]"/>
+                
+                <separator/>
+                <filter string="Cơ bản" 
+                        name="filter_basic" 
+                        domain="[('level', '=', 'basic')]"/>
+                <filter string="Nâng cao" 
+                        name="filter_advanced" 
+                        domain="[('level', '=', 'advanced')]"/>
+                
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Chuyên ngành" name="group_subject" 
+                            context="{'group_by': 'subject_id'}"/>
+                    <filter string="Người phụ trách" name="group_responsible" 
+                            context="{'group_by': 'responsible_id'}"/>
+                    <filter string="Trình độ" name="group_level" 
+                            context="{'group_by': 'level'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Action - Khóa học -->
+    <record id="action_edu_course" model="ir.actions.act_window">
+        <field name="name">Khóa học</field>
+        <field name="res_model">edu.course</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo Khóa học đầu tiên
+            </p>
+            <p>
+                Nhấn nút Tạo để thêm khóa học mới vào hệ thống.
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Form View - Phòng học -->
+    <record id="view_edu_classroom_form" model="ir.ui.view">
+        <field name="name">edu.classroom.form</field>
+        <field name="model">edu.classroom</field>
+        <field name="arch" type="xml">
+            <form string="Phòng học">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(action_edu_session)d" 
+                                type="action" 
+                                class="oe_stat_button" 
+                                icon="fa-graduation-cap"
+                                context="{'search_default_classroom_id': active_id}">
+                            <field name="session_count" widget="statinfo" string="Lớp"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="capacity"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" nolabel="1" placeholder="Mô tả cơ sở vật chất, thiết bị..."/>
+                    </group>
+                    <notebook>
+                        <page string="Lớp học" name="sessions">
+                            <field name="session_ids">
+                                <tree string="Lớp học">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="course_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="instructor_id"/>
+                                    <field name="state"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Tree View - Phòng học -->
+    <record id="view_edu_classroom_tree" model="ir.ui.view">
+        <field name="name">edu.classroom.tree</field>
+        <field name="model">edu.classroom</field>
+        <field name="arch" type="xml">
+            <tree string="Phòng học">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="capacity"/>
+                <field name="session_count"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Search View - Phòng học -->
+    <record id="view_edu_classroom_search" model="ir.ui.view">
+        <field name="name">edu.classroom.search</field>
+        <field name="model">edu.classroom</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Phòng học">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="capacity"/>
+                
+                <filter string="Đang sử dụng" name="filter_active" 
+                        domain="[('active', '=', True)]"/>
+                <filter string="Không sử dụng" name="filter_inactive" 
+                        domain="[('active', '=', False)]"/>
+                
+                <separator/>
+                <filter string="Sức chứa ≥ 30" name="filter_large" 
+                        domain="[('capacity', '&gt;=', 30)]"/>
+                <filter string="Sức chứa &lt; 30" name="filter_small" 
+                        domain="[('capacity', '&lt;', 30)]"/>
+                
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Sức chứa" name="group_capacity" 
+                            context="{'group_by': 'capacity'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    
+    <!-- Action - Phòng học -->
+    <record id="action_edu_classroom" model="ir.actions.act_window">
+        <field name="name">Phòng học</field>
+        <field name="res_model">edu.classroom</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_filter_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo Phòng học đầu tiên
+            </p>
+            <p>
+                Quản lý các phòng học và lịch sử lớp được tổ chức.
+            </p>
+        </field>
+    </record>
+
+</odoo>
